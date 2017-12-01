@@ -1,0 +1,49 @@
+angular.module("customFilters", [])
+		.filter("unique", function() {
+			return function(data, propertyName) {
+				if(angular.isArray(data) && angular.isString(propertyName)) {
+					var results = [];
+					var keys = {};
+					for(var i = 0, len = data.length; i < len; i++) {
+						var val = data[i][propertyName];
+						if(angular.isUndefined(keys[val])) {
+							keys[val] = true;
+							results.push(val);
+						}
+					}
+					return results;
+				} else {
+					return data;
+				}
+			}
+		})
+		.filter("range", function($filter) {
+			return function(data, page, size) {
+				if(angular.isArray(data) && angular.isNumber(page) && angular.isNumber(size)) {
+					var start_index = (page - 1) * size;
+					console.log(start_index,"sdfsdf12");
+
+					if(data.length < start_index) {
+						return [];
+					} else {
+						console.log("sdfsdf");
+						return $filter("limitTo")(data.splice(start_index), size);
+					}
+				} else {
+					return data;
+				}
+			}
+		})
+		.filter("pageCount", function() {
+			return function(data, size) {
+				if(angular.isArray(data) && angular.isNumber(size)) {
+					var results = [];
+					for(var i = 0, len = data.length; i < Math.ceil(len / size); i++) {
+						results.push(i);
+					}
+					return results;
+				} else {
+					return data;
+				}
+			}
+		});
