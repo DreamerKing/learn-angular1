@@ -2,7 +2,7 @@ angular.module("cart", [])
 	.factory("cart", function() {
 		var cartData = [];
 		return {
-			addProduct: function() {
+			addProduct: function(id, name, price) {
 				var addedToExistingItem = false;
 				for(i = 0, len = cartData.length; i < len; i++) {
 					if(cartData[i].id == id){

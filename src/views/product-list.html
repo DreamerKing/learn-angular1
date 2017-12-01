@@ -13,14 +13,14 @@
 	</div>
 		<div class="col-md-8">
 			<div class="well" 
-				ng-repeat="item in data.products | filter: categoryFilterFn | range:selectedPage:pageSiz">
+				ng-repeat="item in data.products | filter: categoryFilterFn | range:selectedPage:pageSize">
 				<h3>
 					<strong>{{ item.name }}</strong>
 					<span class="pull-right label label-primary">
 						{{ item.price | currency }}
 					</span>
 				</h3>
-				<button ng-click="addProductTo(item)"
+				<button ng-click="addProductToCart(item)"
 						class="btn btn-success">
 					Add to cart			
 				</button>

@@ -6,29 +6,26 @@
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css"/>
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap-theme.css"/>
 	<script type="text/javascript">
-		angular.module("sportsStore", ["customFilters", "cart", "ngRoute"])
-			.config(function($routeProvider) {
-
-				$routeProvider.when("/complete", {
+		angular.module("sportsStore",["customFilters", "cart", "ngRoute"])
+		   .config( function($routeProvider) {
+				$routeProvider
+				.when("/complete", {
 					templateUrl: "src/views/thank-you.html"
-				});
-
-				$routeProvider.when("/placeorder", {
+				})
+				.when("/placeorder", {
 					templateUrl: "src/views/place-order.html"
-				});
-
-				$routeProvider.when("/checkout", {
-					templateUrl: "srcviews/checkout-summary.html"
-				});
-
-				$routeProvider.when("/products", {
+				})
+				.when("/checkout", {
+					templateUrl: "src/views/checkout-summary.html",
+					controller: "cartSummaryCtrl"
+				})
+				.when("/products", {
+					templateUrl: "src/views/product-list.html"
+				})
+				.otherwise({
 					templateUrl: "src/views/product-list.html"
 				});
-
-				$routeProvider.otherwise({
-					templateUrl: "src/views/product-list.html"
-				});
-			});
+		});
 	</script>
 	<script type="text/javascript" src="src/controllers/sports-store.js"></script>
 	<script type="text/javascript" src="src/filters/custom.js"></script>

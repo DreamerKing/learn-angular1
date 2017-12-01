@@ -21,12 +21,9 @@ angular.module("customFilters", [])
 			return function(data, page, size) {
 				if(angular.isArray(data) && angular.isNumber(page) && angular.isNumber(size)) {
 					var start_index = (page - 1) * size;
-					console.log(start_index,"sdfsdf12");
-
 					if(data.length < start_index) {
 						return [];
 					} else {
-						console.log("sdfsdf");
 						return $filter("limitTo")(data.splice(start_index), size);
 					}
 				} else {
