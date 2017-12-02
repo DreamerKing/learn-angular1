@@ -1,3 +1,35 @@
-<div>
-	Admin login!
+<div class="well" ng-controller="authCtrl">
+	<div class="alert alert-info" ng-hide="authenticationError">
+		Enter you username and password and click login to authenticate
+	</div>
+	<div class="alert alert-danger" ng-show="authenticationError">
+		Authentication Faild ({{ authenticationError.status}}). Try again.
+	</div>
+
+	<form name="authForm" novalidate>
+		<div class="form-group">
+			<label>Username</label>
+			<input class="form-contrl" 
+					name="username" 
+					type="username" 
+					ng-model="username" 
+					required />
+		</div>
+		<div class="form-group">
+			<label>Password</label>
+			<input class="form-contrl" 
+					name="password" 
+					type="password" 
+					ng-model="password" 
+					required />
+		</div>
+		<div class="text-center">
+			<button class="btn btn-primary" 
+					ng-click="authenticate(username, password)"
+					ng-disabled="authForm.$invalid">
+						Login
+					</button>
+		</div>
+	</form>
+
 </div>

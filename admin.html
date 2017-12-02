@@ -1,35 +1,30 @@
 <!DOCTYPE html>
-<html ng-app="sportsStore">
+<html ng-app="sportsStoreAdmin">
 <head>
 	<title>Sport Store</title>
 	<script type="text/javascript" src="lib/angular/angular.js"></script>
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css"/>
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap-theme.css"/>
 	<script type="text/javascript" src="lib/angular-route/angular-route.js"></script>
+	<script type="text/javascript" src="lib/angular-resource/angular-resource.js"></script>
 	<script type="text/javascript">
-		angular.module("sportsStoreAdmin", ["ngRoute"])
+		angular.module("sportsStoreAdmin", ["ngRoute", "ngResource"])
 				.config(function($routeProvider) {
-					$routerProvide
-					.when("/login", {
-						templateUrl: "src/views/admin-login.html"
-					})
-					.when("/main", {
-						templateUrl: "src/views/admin-main/html"
-					})
-					.otherwise({
-						redirectTo: "/login";
-					});
+					$routeProvider
+						.when("/login", {
+							templateUrl: "src/views/admin-login.html"
+						})
+						.when("/main", {
+							templateUrl: "src/views/admin-main.html"
+						})
+						.otherwise({
+							redirectTo: "/login"
+						});
 				});
 	</script>
+	<script type="text/javascript" src="src/controllers/admin.js"></script>
+	<script type="text/javascript" src="src/controllers/admin-products.js"></script>
 </head>
-<body ng-controller="sportsStoreCtrl">
-	<div class="navbar navbar-inverse">
-		<a class="navbar-brand" href="#">Sport Store</a>
-		<cart-summary />	
-	</div>
-	<div class="alert alert-danger" ng-show="data.error">
-		Error ({{data.error.status}}). The product data was't not load.
-		<a class="alert-link" href="/app.html">Click Here to try again</a>
-	</div>
+<body>
 	<ng-view />	
 </html>
