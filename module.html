@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="moduleModule">
+<head>
+	<meta charset="UTF-8">
+	<title>learn angular module</title>
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap-theme.css">
+	<script src="lib/angular/angular.js"></script>
+	<script src="module/controllers.js"></script>
+	<script src="module/filters.js"></script>
+	<script src="module/directives.js"></script>
+	<script src="module/services.js"></script>
+	<script>
+/*		var app = angular.module("moduleModule", [])
+			.constant("dayNames",["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"])
+			.value("now", new Date())
+			.controller("moduleCtrl", function($scope) {
+				$scope.data = {
+					cities: ["London","New York", "Paris"],
+					totalClicks: 0
+				};
+
+				$scope.$watch('data.totalClicks', function(newValue) {
+					console.log("Total totalClicks ", newValue)
+				}); 
+			})
+			.controller("dayCtrl", function($scope, days) {
+				$scope.day = days.today;
+			})
+			.controller("tomCtrl", function($scope, days) {
+				$scope.day = days.tomorrow;
+			})	
+			.directive("triBtn", function() {
+				return {
+					scope: { 
+						counter: "=counter"
+					},
+					link: function(scope, element, attrs) {
+						element.on("click", function(event) {
+							console.log("Button click: ", event.target.innerText);
+							scope.$apply(function() {
+								scope.counter++;
+							});
+						});
+					}
+				}
+			})
+			.directive("highlight", function(dayNames, $filter) {
+				var dayFilter = $filter("dayName");
+				return function(scope, element, attrs) {
+					if(dayFilter(scope.day) == attrs["highlight"]) {
+						element.css("color", "red");
+					}
+				}
+			})
+			.filter("dayName", function(dayNames) {
+				return function(input) {
+					return angular.isNumber(input) ? dayNames[input] : input;
+				};
+			})
+			.service("days", function(now) {
+				this.today = now.getDay();
+				this.tomorrow = this.today + 1;
+			});*/
+
+			// 模块化
+			var app = angular.module("moduleModule",[
+				 "moduleModule.Controllers", 
+				 "moduleModule.Filters",
+				 "moduleModule.Directives",
+				 "module.Services"
+			 ]);
+
+			app.value("now", new Date());
+			angular.module("module.Services", [])
+			.service("days", function(now) {
+				this.today = now.getDay();
+				this.tomorrow = this.today + 1;
+			});
+
+	</script>
+</head>
+<body>
+	<div class="well" ng-controller="moduleCtrl">
+		<div class="htn-group" 
+			 tri-btn 
+			 counter="data.totalClicks" 
+			 source="data.cities">
+			<button class="btn btn-default"
+					ng-repeat="city in data.cities"
+					>
+			   {{city}}			
+			</button>
+		</div>
+		<h5>Total Clicks: {{data.totalClicks}}</h5>
+	</div>
+	<div ng-controller="dayCtrl">
+		<p>Today is  {{day}}</p>
+	</div>
+	<div ng-controller="tomCtrl" highlight="Tue">
+		<p>Tomorrow is {{ day | dayName}}</p>
+	</div>
+</body>
+</html>
