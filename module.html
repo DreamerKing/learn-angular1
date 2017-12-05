@@ -71,11 +71,24 @@
 				 "module.Services"
 			 ]);
 
+			app.constant("startTime", new Date().toLocaleTimeString());
+			app.config(function(startTime){
+				console.log("Main module config: ", startTime);
+			});
+			
+			app.run(function(startTime) {
+				console.log("Main module run: ", startTime);
+			});
+
 			app.value("now", new Date());
 			angular.module("module.Services", [])
 			.service("days", function(now) {
 				this.today = now.getDay();
 				this.tomorrow = this.today + 1;
+			}).config(function() {
+				console.log("Services module config: (no time)");
+			}).run(function(startTime) {
+				console.log("Services module run: ", startTime);
 			});
 
 	</script>

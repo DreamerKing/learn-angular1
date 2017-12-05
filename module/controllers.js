@@ -6,7 +6,7 @@ controllersModule.controller("moduleCtrl", function($scope) {
 	};
 
 	$scope.$watch('data.totalClicks', function(newValue) {
-		console.log("Total totalClicks ", newValue)
+		// console.log("Total totalClicks ", newValue)
 	}); 
 });
 
